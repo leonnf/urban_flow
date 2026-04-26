@@ -1,7 +1,7 @@
 # Urban Flow - Sprint 1
 
 ## Objetivo
-Aplicar conocimientos para el versionado de código, la organización, limpieza del código y la utilización de Pandas para el análisis y depuración de datos históricos de radares urbanos.
+Aplicar  conocimientos para el versionado de código, la organización, limpieza del código y la utilización de Pandas para el análisis y depuración de datos históricos de radares urbanos.
 
 ## Introducción y Contexto
 El proyecto Urban Flow analiza los datos históricos de multas por exceso de velocidad en la localidad de Vaalserberg de Bélgica, ubicada en la zona fronteriza con Países Bajos y Alemania.
