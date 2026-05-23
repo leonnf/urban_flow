@@ -1,3 +1,15 @@
+commit 36c45cdc0ebd2e9b261dd58553114dec93e77b05
+Author: leonnf <leon.n.fabian@gmail.com>
+Date:   Sat May 23 02:38:28 2026 +0000
+
+    Ejercicio 02-03: Vista, normalización y limpieza de datos
+
+commit cdfd60625f2ec090390d71e2299b1c175a5e5979
+Author: leonnf <leon.n.fabian@gmail.com>
+Date:   Sun Apr 26 21:03:19 2026 +0000
+
+    Punto 07: conclusion del dataset
+
 commit 626e93584b9d8e0eafa756dc43fea4b474d54a01
 Author: leonnf <leon.n.fabian@gmail.com>
 Date:   Sun Apr 26 21:01:53 2026 +0000
