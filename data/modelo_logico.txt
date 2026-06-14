@@ -1,0 +1,96 @@
+
+MODELO LÓGICO ENTIDAD-RELACIÓN
+======================================================================
+
+ENTIDAD: VEHICULO
+─────────────────
+Atributos:
+  • id (INT, PRIMARY KEY, AUTO_INCREMENT)
+  • patente (VARCHAR(10), UNIQUE, NOT NULL)
+
+Descripción: Representa cada vehículo que recibe multas.
+
+
+ENTIDAD: RADAR
+──────────────
+Atributos:
+  • id (INT, PRIMARY KEY, AUTO_INCREMENT)
+  • ubicacion (VARCHAR(200), NOT NULL)
+
+Descripción: Representa los puntos de control que generan multas.
+
+
+ENTIDAD: MULTA
+───────────────
+Atributos:
+  • id (INT, PRIMARY KEY, AUTO_INCREMENT)
+  • veh_id (INT, FOREIGN KEY → Vehiculo.id)
+  • radar_id (INT, FOREIGN KEY → Radar.id)
+  • fecha (VARCHAR(10))
+  • hora (VARCHAR(8))
+  • velocidad_registrada (INT)
+  • velocidad_maxima (INT)
+  • exceso_velocidad (INT)
+  • estado_multa (VARCHAR(20))
+
+Descripción: Registra cada infracción. Vincula un vehículo con un radar.
+
+
+ENTIDAD: EVIDENCIA
+───────────────────
+Atributos:
+  • id (INT, PRIMARY KEY, AUTO_INCREMENT)
+  • multa_id (INT, FOREIGN KEY → Multa.id, UNIQUE)
+  • archivo_imagen (VARCHAR(200))
+  • ratio (FLOAT)
+
+Descripción: Foto/evidencia visual de la infracción. Cada multa tiene
+             0 o 1 evidencia (relación opcional).
+
+
+RELACIONES
+══════════
+
+1:N (Vehículo → Multa)
+  Un vehículo puede tener MUCHAS multas.
+  Ejemplo: patente "AA123BB" tiene 5 multas diferentes.
+
+  Vehículo (1) ──────< Multa (N)
+
+1:N (Radar → Multa)
+  Un radar puede generar MUCHAS multas.
+  Ejemplo: Radar en "Av. 25 de Mayo" generó 120 multas.
+
+  Radar (1) ──────< Multa (N)
+
+0..1:1 (Multa → Evidencia)
+  Una multa tiene 0 o 1 evidencia (opcional).
+  No todas las multas tienen foto.
+
+  Multa (1) ──────< Evidencia (0..1)
+
+
+DIAGRAMA ER
+═══════════
+
+┌─────────────┐         ┌──────────┐         ┌─────────┐
+│  Vehículo   │────1:N──│  Multa   │────N:1──│ Radar   │
+├─────────────┤         ├──────────┤         └─────────┘
+│ id (PK)     │         │ id (PK)  │
+│ patente (UK)│         │ veh_id   │ (FK→Vehículo)
+└─────────────┘         │ radar_id │ (FK→Radar)
+                        │ fecha    │
+                        │ estado   │
+                        │ etc...   │
+                        └──────────┘
+                              │
+                            0..1:1
+                              │
+                        ┌──────────────┐
+                        │  Evidencia   │
+                        ├──────────────┤
+                        │ id (PK)      │
+                        │ multa_id(FK) │ (UNIQUE)
+                        │ archivo_img  │
+                        │ ratio        │
+                        └──────────────┘
