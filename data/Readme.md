@@ -1,32 +1,45 @@
 
-## Conclusiones — Sprint 2
+## Conclusiones — Sprint 3
 
-El cruce entre los registros de multas y las imágenes de los radares
-permitió identificar qué infracciones cuentan con evidencia visual válida.
+### Cobertura de Evidencia Visual
 
-Del total de 969 multas procesadas, 385 pudieron vincularse a una imagen
-(Casi un 40%), mientras que 584 no tienen foto asociada. De las 106 imágenes
-disponibles, solo 25 lograron matchear con una multa del dataset,
-y 81 quedaron sin correspondencia. Esto refleja que el OCR comete errores
-al leer patentes en condiciones no ideales de iluminación o ángulo, y que
-no todas las imágenes corresponden a una infracción.
+El análisis del dataset de multas de tránsito revela que de las 969 infracciones registradas, solo 103 cuentan con evidencia visual confirmada, lo que representa el 10.63% de cobertura. Las 866 multas restantes (89.37%) carecen de evidencia fotográfica.
 
-De las 323 multas pendientes de pago, 119 cuentan con respaldo fotográfico,
-convirtiéndose en los casos prioritarios para iniciar acciones
-de cobro al tener evidencia visual que respalda la infracción.
+- **Total de multas:** 969
+- **Multas con evidencia:** 103
+- **Multas sin evidencia:** 866
+- **Porcentaje confirmado visualmente:** 10.63%
+- **Imágenes únicas vectorizadas en ChromaDB:** 25
 
-## Conclusiones — Sprint 2
+### Patentes con Mayor Reincidencia
 
-El cruce entre los registros de multas y las imágenes de los radares
-permitió identificar qué infracciones cuentan con evidencia visual válida.
+Se identificó que las patentes con mayor cantidad de infracciones concentran un patrón significativo de violaciones. La patente más multada registró 22 infracciones, siendo las tres principales:
 
-Del total de 969 multas procesadas, 385 pudieron vincularse a una imagen
-(Casi un 40%), mientras que 584 no tienen foto asociada. De las 106 imágenes
-disponibles, solo 25 lograron matchear con una multa del dataset,
-y 81 quedaron sin correspondencia. Esto refleja que el OCR comete errores
-al leer patentes en condiciones no ideales de iluminación o ángulo, y que
-no todas las imágenes corresponden a una infracción.
+- **UM96201:** 22 infracciones
+- **T0YDR:** 22 infracciones
+- **TL03GOG:** 21 infracciones
 
-De las 323 multas pendientes de pago, 119 cuentan con respaldo fotográfico,
-convirtiéndose en los casos prioritarios para iniciar acciones
-de cobro al tener evidencia visual que respalda la infracción.
+### Actividad de Radares
+
+Los puntos de control generaron una distribución desigual de multas. Los tres radares más activos registraron entre 319 y 328 infracciones cada uno:
+
+- **AV SIEMPRE VIVA:** 328 multas
+- **AV LIBERTADOR:** 322 multas
+- **AV LIBERTADOR:** 319 multas
+
+### Implementación Técnica
+
+Se desarrolló una solución completa que integra:
+- Base de datos relacional SQLite con 4 entidades (Vehículo, Radar, Multa, Evidencia)
+- Migración de datos a DVC para control de versiones
+- Base de datos vectorial ChromaDB con 25 imágenes de patentes vectorizadas
+- Búsqueda por similitud usando OpenClip ViT-B-32 para identificación visual
+
+### Conclusiones Finales
+
+La solución implementada permite:
+1. Rastrear infracciones por vehículo y detectar patrones de reincidencia
+2. Analizar la actividad de cada punto de control de tránsito
+3. Buscar vehículos por similitud visual de patente
+4. Mantener datos versionados con control de cambios mediante DVC
+5. Proporcionar una base para análisis predictivo y enforcement de tránsito
