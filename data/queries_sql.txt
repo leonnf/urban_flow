@@ -1,0 +1,58 @@
+
+CONSULTAS SQL - EJERCICIO 07
+═══════════════════════════════════════════════════════════════
+
+CONSULTA 1: Top 10 patentes con mayor cantidad de multas
+─────────────────────────────────────────────────────────────
+SELECT v.patente, COUNT(m.id) as cantidad
+FROM vehiculo v
+JOIN multa m ON v.id = m.veh_id
+GROUP BY v.patente
+ORDER BY cantidad DESC
+LIMIT 10;
+
+═══════════════════════════════════════════════════════════════
+
+CONSULTA 2: Multas sin evidencia
+─────────────────────────────────────────────────────────────
+SELECT m.id, v.patente, m.fecha
+FROM multa m
+JOIN vehiculo v ON m.veh_id = v.id
+WHERE m.id NOT IN (SELECT multa_id FROM evidencia)
+ORDER BY m.fecha ASC
+LIMIT 10;
+
+═══════════════════════════════════════════════════════════════
+
+CONSULTA 3: Radares más activos
+─────────────────────────────────────────────────────────────
+SELECT r.id, r.ubicacion, COUNT(m.id) as cantidad
+FROM radar r
+JOIN multa m ON r.id = m.radar_id
+GROUP BY r.id, r.ubicacion
+ORDER BY cantidad DESC;
+
+═══════════════════════════════════════════════════════════════
+
+CONSULTA 4: Top 10 reincidentes (período 2020)
+─────────────────────────────────────────────────────────────
+SELECT v.patente, COUNT(m.id) as cantidad
+FROM vehiculo v
+JOIN multa m ON v.id = m.veh_id
+WHERE m.fecha >= '2020-01-01' AND m.fecha <= '2020-12-31'
+GROUP BY v.patente
+ORDER BY cantidad DESC
+LIMIT 10;
+
+═══════════════════════════════════════════════════════════════
+
+CONSULTA 5: Estadísticas de evidencia visual
+─────────────────────────────────────────────────────────────
+SELECT
+  COUNT(m.id) as total_multas,
+  COUNT(e.id) as con_foto,
+  ROUND(100.0 * COUNT(e.id) / COUNT(m.id), 2) as porcentaje
+FROM multa m
+LEFT JOIN evidencia e ON m.id = e.multa_id;
+
+═══════════════════════════════════════════════════════════════
